@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<header>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</header>
+<div class="main-header" ng-hide="ctrl.loggedInUsername">
+  <!-- create user -->
+  <form ng-if="$index === ctrl.indexOfUserFormToShow" ng-submit="ctrl.createUser()">
+
+    <div class="signUpContainer" ng-if="$index !== ctrl.popUpSignBox">
+      <button class="xButton" ng-click="ctrl.popUpSignBox = $index" >X</button><br/>
+      <p class="signUp" align="center">Sign Up</p>
+      <input class="un" type="text" ng-model="ctrl.username" placeholder="Username"/><br/>
+      <input class="pass" type="password" ng-model="ctrl.password" placeholder="Password"/><br/>
+      <input class="submitLogIn" type="submit" value="Create user"/><br/>
+
+    <div class="signUpContainer">
+      <button class="xButton" ng-click="ctrl.indexOfUserFormToShow = null" >X</button>
+      <div class="signIn"><span class="login-text">Sign Up</span></div>
+      <input class="un" type="text" ng-model="ctrl.username" placeholder="Username"/>
+      <input class="pass" type="password" ng-model="ctrl.password" placeholder="Password"/>
+      <input class="submitLogIn" type="submit" value="Create user"/>
+
+    </div>
+  </form>
+  <a href="#" class="btn btn-login btnz" ng-click="ctrl.indexOfUserFormToShow = $index">Sign Up</a> |
+  <a href="#" class="btn btn-login btnz" ng-click="ctrl.indexOfLogFormToShow = $index" >Log In</a>
+  <!-- log in user -->
+  <form ng-if="$index === ctrl.indexOfLogFormToShow" ng-submit="ctrl.logIn()">
+    <div class="signUpContainer">
+      <button class="xButton" ng-click="ctrl.indexOfLogFormToShow = null" >X</button>
+      <div class="signIn"><span class="login-text">Log in</span></div>
+      <input class= "un" type="text" ng-model="ctrl.logUsername" placeholder="Username"/>
+      <input class= "pass" type="password" ng-model="ctrl.logPassword" placeholder="Password"/>
+      <input class="submitLogIn" type="submit" value="Log In"/>
+    </div>
+  </form>
+</div>
+<!-- seesion for current user  -->
+<div ng-if="ctrl.loggedInUsername" class="logout-area">
+<span class="greeting">Welcome, {{ctrl.loggedInUsername}}</span>
+<form class="logoutButton" ng-submit="ctrl.logOut()">
+  <input class="btn-login logout-btn" type="submit" value="Logout">
+</form>
+</div>

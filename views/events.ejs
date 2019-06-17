@@ -1,0 +1,79 @@
+<html>
+<header>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/css/app.css">
+</header>
+	<!--search bar -->
+  <body>
+<div class="searchbar">
+	 <h3 class="sub-header">Events</h3>
+	 <label class="searchbar" for="Search by">
+	 	<input class="searchbox" type='text' placeholder='Search for event' ng-model='searchBox' ng-submit="ctrl.searchForItem()">
+	   <input type="submit" value="Search">
+	</label>
+</div>
+<!--Add item-->
+<!-- only show if user has logged in to there account-->
+<div ng-if="ctrl.loggedInUsername">
+	<button class="btn btn-login add-btn"
+					ng-click="showBoxes = !showBoxes">
+						Add Event</button>
+	<form ng-if="showBoxes" ng-submit="ctrl.createEvent()">
+	  <input type="text" ng-model="ctrl.name" placeholder="Event Name" required>
+	  <input type="text" ng-model="ctrl.price" placeholder="Event Price" required>
+	  <input type="text" ng-model="ctrl.email" placeholder="email" required>
+		<input type="text" ng-model="ctrl.image" placeholder="image" required>
+		<input type="text" ng-model="ctrl.zip" placeholder="City, State" required>
+		<input type="text" ng-model="ctrl.description" placeholder="description">
+	  <input type="submit" value="Add Event"/>
+	</form>
+</div>
+
+<div class="mainContainer">
+	<div ng-repeat="event in ctrl.events | filter: searchBox" class="eventContainer">
+	<!-- click for show item  -->
+		<div class="showEvent">
+			<img src="{{ event.image }}" ng-click="ctrl.showEvent(event._id)" class="ctImage"/><br/>
+			<h4>{{ event.name }}</h4>
+			<h5 class="price">{{ event.price | currency }}</h5>
+			<button type="button"
+							ng-if="$index !== ctrl.indexOfEmailFormToShow"
+							ng-click="ctrl.indexOfEmailFormToShow = $index"
+							name="button" class="buttonForEvent"
+							>Message</button>	<button ng-click="ctrl.showEvent('')" ng-show="ctrl.targetIndexId === item._id" class="buttonForEvent">Close</button>
+		</div>
+		<!-- show detail when clicked -->
+		<div ng-show="ctrl.targetIndexId === event._id" class="EventShow">
+			<%= event.description %> <br/><br/>
+			<h5 class="zip">{{ event.zip }}</h5>
+		</div>
+		<!-- show EDIT/DELETE button only for listing user -->
+			<div ng-if="ctrl.loggedInUserId === event.idForUser">
+			  <button ng-click="ctrl.deleteEvent(event)" class="buttonForEvent">DELETE</button>
+			  <form ng-if="$index === ctrl.indexOfEditFormToShow" ng-submit="ctrl.editEvent(event);">
+			    <input type="text" ng-model="ctrl.updatedName" placeholder="Event Name" />
+			    <input type="text" ng-model="ctrl.updatedPrice" placeholder="Event Price" />
+			    <input type="text" ng-model="ctrl.updatedEmail" placeholder="Email" />
+			    <input type="text" ng-model="ctrl.updatedimage" placeholder="image" />
+			    <input type="text" ng-model="ctrl.updatedZip" placeholder="Postal Code" />
+					<input type="text" ng-model="ctrl.updatedDescription" placeholder="Description" />
+			    <input type="submit" value="Update">
+			    </form>
+			  <button type="button"
+			          ng-if="$index !== ctrl.indexOfEditFormToShow"
+			          ng-click="ctrl.indexOfEditFormToShow = $index"
+			          name="button" class="buttonForEvent"
+			          >EDIT</button>
+			</div>
+		  <form ng-submit="ctrl.sendEmail()" ng-if="$index === ctrl.indexOfEmailFormToShow">
+		    <input type="text" ng-model="ctrl.sendName" placeholder="Your Name" />
+		    <input type="text" ng-model="ctrl.sendMessage" placeholder=" Your Message" />
+		    <input type="text" ng-model="ctrl.sendMail" placeholder="Your Email" />
+				<input type="text" ng-model="ctrl.sendTo" ng-init="ctrl.sendTo=item.email"/>
+		    <input type="submit" value="Send">
+		  </form>
+	</div>
+</div>
+</body>
+</html>

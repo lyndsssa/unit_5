@@ -1,0 +1,32 @@
+{
+  "name": "unit_5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "bootstrap": "^3.4.1",
+    "ejs": "^2.6.1",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "mongodb": "^3.2.7",
+    "mongoose": "^5.5.15",
+    "nodemailer": "^6.2.1",
+    "router": "^1.3.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lyndsssa/unit_5.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lyndsssa/unit_5/issues"
+  },
+  "homepage": "https://github.com/lyndsssa/unit_5#readme"
+}

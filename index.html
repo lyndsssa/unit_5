@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" ng-app="MyApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Second Life</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/app.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
+    <script src="/app.js" charset="utf-8"></script>
+  </head>
+
+
+<!--- body ---->
+  <body ng-controller="appController as ctrl">
+  <div class="container-fluid">
+    <div class="name">
+      <span class="logo">Net Your Hood</span>
+      <div class="login" ng-include="'partials/users.html'"></div>
+    </div>
+    <div>
+    <!-- user path /partials/users.html -->
+    <!-- <div class="login" ng-include="'partials/users.html'"></div> -->
+    <div class="headerImage"> <img class="img-fluid" src=""> </div>
+    <!-- search path /partials/search.html -->
+    <div class="search" ng-include="'partials/search.html'"></div>
+    <div class="container-fluid" ng-include="ctrl.includePath"></div>
+    <br>
+    <br>
+    <br>
+    <div class="footer-content">
+    <footer class="footer-basic-centered">
+      <h4 class="footer-company-motto">
+        Find your next adventure with your family, it's just a search away.</h4> <br>
+      <h4>Created by <a href="https://github.com/lyndsssa">Lyndsey Ajster</a></h4>
+      <br>
+      <h4 class="footer-company-name">Net Your Hood &copy; 2019</h4>
+    </footer>
+    </div>
+  </div>
+  </body>
+</html>
